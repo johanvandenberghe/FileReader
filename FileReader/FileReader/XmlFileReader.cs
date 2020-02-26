@@ -42,6 +42,7 @@ namespace FileReader
         public string ReadEncodedFile(string path, Func<string, string> decoder)
         {
             var encodedContend = System.IO.File.ReadAllText(path);
+            PermissionDemand(path);
             return decoder(encodedContend);
         }
     }
