@@ -1,13 +1,24 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security;
+using System.Security.Permissions;
 using System.Xml;
 
 namespace FileReader
 {
-    public class XmlFileReader : IFileReader
+    public class XmlFileReader : SecurisedFileReader
     {
-        public string ReadFile(string path)
+        public XmlFileReader(IPermission permission) :base(permission, new string[] { "toto", "tata" })
+        {
+        }
+
+        public override string ReadFile(string path)
         {
             string result = string.Empty;
+            PermissionDemand(path);
+
             XmlTextReader reader = new XmlTextReader(path);
             while (reader.Read())
             {
