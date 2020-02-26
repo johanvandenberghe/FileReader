@@ -30,6 +30,7 @@ namespace FileReader
             }
         }
 
+        
         public abstract string ReadFile(string path);
     }
 }

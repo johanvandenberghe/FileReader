@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace FileReader
 {
-    public class XmlFileReader : SecurisedFileReader
+    public class XmlFileReader : SecurisedFileReader, IEncodedFileReader
     {
         public XmlFileReader(IPermission permission) :base(permission, new string[] { "toto", "tata" })
         {
@@ -37,6 +37,12 @@ namespace FileReader
             }
 
             return result;
+        }
+
+        public string ReadEncodedFile(string path, Func<string, string> decoder)
+        {
+            var encodedContend = System.IO.File.ReadAllText(path);
+            return decoder(encodedContend);
         }
     }
 }
